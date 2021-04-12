@@ -13,14 +13,14 @@ soup = BeautifulSoup(page.content, 'html.parser')
 body = soup.find('div', class_='posts-wrapper row')
 articles = body.find_all('article')
 
-max = 3
+max = 1
 urls = []
 for i, article in enumerate(articles):
     title = article.find('h2', class_='blog-entry-title entry-title')
     url = title.find('a')
     urls.append(url['href'])
     print(url['href'])
-    if i >=3:
+    if i >=max:
         break
 
 for url in urls:
@@ -34,10 +34,13 @@ for url in urls:
     p_alls = body.find_all('p')
     description = p_alls[0]
     youtube = body.find('iframe', class_='youtube-player')
+    audio = body.find('a', class_='powerpress_link_d',href=True, title='Download')
+
     #print(body)
     print(title.text)
     print(description.text)
     print(youtube['src'])
+    print(audio['href'])
     """
     content_day = soup_day.find_all('p')
     description = content_day[0]
