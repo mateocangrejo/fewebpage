@@ -2,9 +2,14 @@ from datetime import datetime
 import requests
 from bs4 import BeautifulSoup
 
+
+date = input("Hola, registra una fecha en formato 2021-04-10: ")
+dt = datetime.strptime(date, '%Y-%m-%d')
+print('Registraste la fecha:', dt.year,'-',dt.month,'-',dt.day)
+
 url_base = 'https://www.ciudadredonda.org/calendario-lecturas/evangelio-del-dia/?f='
 #url='https://www.ciudadredonda.org/calendario-lecturas/evangelio-del-dia/?f=2021-04-11'
-date = '2021-04-12'
+#date = '2021-04-12'
 
 url=url_base+date
 page = requests.get(url)
