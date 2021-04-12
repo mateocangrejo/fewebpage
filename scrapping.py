@@ -40,26 +40,25 @@ for oracion, inputs_urls in dict_inputs.items():
     dict_urls[oracion] = url_base+inputs_urls[0]+'/'+oracion+'-'+inputs_urls[1]+'/'
 
 for oracion, url in dict_urls.items():
-    print('Empezamos con: ',oracion)
+    print('\nEmpezamos con: ',oracion)
     print('Accederemos a la url:',url)
     print('Procesando ...................\n')
     page = requests.get(url)
 
     soup = BeautifulSoup(page.content, 'html.parser')
-    #print('todo correcto hasta aca')
 
-    #results = soup.find(id='ResultsContainer')
-    title_elem = soup.find('h1', class_='title entry-title')
-    body = soup.find('div', class_='nv-content-wrap entry-content')
+    try:
+        title_elem = soup.find('h1', class_='title entry-title')
+        body = soup.find('div', class_='nv-content-wrap entry-content')
+        description = body.find_all('p')
+        youtube = body.find('iframe', class_='youtube-player')
+        audio = body.find('a', class_='powerpress_link_d',href=True, title='Download')
 
-    description = body.find_all('p')
-    youtube = body.find('iframe', class_='youtube-player')
-
-    audio = body.find('a', class_='powerpress_link_d',href=True, title='Download')
-
-    print(title_elem.text)
-    print(description[0].text)
-    print(description[1].text)
-    print(audio['href'])
-    if youtube is not None:
-        print(youtube['src'])
+        print(title_elem.text)
+        print(description[0].text)
+        print(description[1].text)
+        print(audio['href'])
+        if youtube is not None:
+            print(youtube['src'])
+    except:
+        continue
