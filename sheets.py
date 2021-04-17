@@ -20,7 +20,7 @@ def read_sheets(sample_range):
     print(values)
 
 SAMPLE_RANGE_NAME='Santifica el día!A1:I1'
-read_sheets(SAMPLE_RANGE_NAME)
+#read_sheets(SAMPLE_RANGE_NAME)
 
 def write_sheets(range_write, value_range):
 
@@ -49,4 +49,4 @@ list= [['aa',2],['ba',4]]
 
 value_range={'values':list}
 
-write_sheets(range_write, value_range)
+#write_sheets(range_write, value_range)
