@@ -68,7 +68,7 @@ def get_oraciones_liturgia(date):
             #print('p_0:', description[0].text)
             #print('p_1:',description[1].text)
             #print('p_2:',description[2].text)
-            3print('p_3:',description[3].text)
+            #print('p_3:',description[3].text)
             #print('audio:',audio['href'])
             if youtube is not None:
                 dict_prov['youtube']=youtube['src']

@@ -9,13 +9,13 @@ from scrapping import get_oraciones_liturgia
 date = input("Hola, registra una fecha en formato 2021-04-10: ")
 
 #lecturas de la misa
-"""
-lecutars_misa_dia = get_lectura_misa(date)
-range_write='Santifica el día!A22'
-list= [[date,lecutars_misa_dia]]
+
+lecturas_misa_dia = get_lectura_misa(date)
+range_write='Santifica el día!A25'
+list= [["Lecturas del día","","","","",date,lecturas_misa_dia]]
 value_range={'values':list}
 write_sheets(range_write, value_range)
-"""
+
 #textos de la liturgia
 """
 list = []
@@ -31,6 +31,7 @@ value_range={'values':list}
 write_sheets(range_write, value_range)
 """
 #datos de las oraciones de la liturgia
+"""
 list = []
 dict_oraciones_liturgia = get_oraciones_liturgia(date)
 for oracion,dict_prov in  dict_oraciones_liturgia.items():
@@ -49,6 +50,7 @@ for oracion,dict_prov in  dict_oraciones_liturgia.items():
 range_write='Santifica el día!A27'
 value_range={'values':list}
 write_sheets(range_write, value_range)
+"""
 
 #update_night(date,range_write):
 #   update_laudes(date), update_lectio(date), update_gracia(date), update_homilia(date)

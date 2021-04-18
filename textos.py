@@ -35,14 +35,14 @@ def get_textos_liturgia(date):
     dict_salida = {}
     for oracion, name in dict_oraciones.items():
         url=url_base+date_str+'/'+oracion+'.htm'
-        print('............\n')
-        print('Accederemos al URL de',oracion,':',url)
+        #print('............\n')
+        #print('Accederemos al URL de',oracion,':',url)
 
         page = requests.get(url)
         soup = BeautifulSoup(page.content, 'html.parser')
         body = soup.find('div', id='cuerpo')
 
         dict_salida[oracion]=str(body.decode_contents())
-        print(body.decode_contents())
+        #print(body.decode_contents())
         #input('Siguiente, dale enter:')
     return dict_salida
