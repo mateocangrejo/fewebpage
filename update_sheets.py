@@ -42,11 +42,11 @@ for oracion,dict_prov in  dict_oraciones_liturgia.items():
         list_int.append(item)
         #list.append(list_int)
     list.append(list_int)
-range_write='Santifica el día!A22'
+range_write='Santifica el día!A27'
 value_range={'values':list}
 write_sheets(range_write, value_range)
 
-#update_night(date):
+#update_night(date,range_write):
 #   update_laudes(date), update_lectio(date), update_gracia(date), update_homilia(date)
-#update_morning(date):
+#update_morning(date,range_write):
 #   update_visperas(date), update_completas(date)
