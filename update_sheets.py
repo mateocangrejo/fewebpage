@@ -5,31 +5,47 @@ from sheets import read_sheets, write_sheets
 from lecturas_misa import get_lectura_misa
 from textos import get_textos_liturgia
 from scrapping import get_oraciones_liturgia
-
+from gracia_del_dia import get_gracia_dia
 date = input("Hola, registra una fecha en formato 2021-04-10: ")
 
+#La gracia del dia info
+"""
+list = []
+dict_gracia_dia=get_gracia_dia(date)
+list_int = []
+for k,v in  dict_gracia_dia.items():
+    list_int.append(v)
+list_int.append(date)
+list.append(list_int)
+range_write='Santifica el día!A22'
+value_range={'values':list}
+write_sheets(range_write, value_range)
+"""
 #lecturas de la misa
-
+"""
 lecturas_misa_dia = get_lectura_misa(date)
 range_write='Santifica el día!A25'
 list= [["Lecturas del día","","","","",date,lecturas_misa_dia]]
 value_range={'values':list}
 write_sheets(range_write, value_range)
-
+"""
 #textos de la liturgia
-"""
-list = []
+
+list_final = []
 dict_text_liturgia = get_textos_liturgia(date)
-for k,v in  dict_text_liturgia.items():
-    list_int = [date,k,v]
-    list.append(list_int)
-    #print(k)
-    #print('.................')
-    #print(v)
+dict_text_liturgia['gracia']=''
+dict_text_liturgia['homilia']=''
+order_keys = ['laudes','oficio','gracia','homilia','visperas','completas']
+order_values = list(dict_text_liturgia.get(i) for i in order_keys)
+for k,v in zip(order_keys,order_values):
+    list_prov = []
+    if k!='gracia' or k!='homilia':
+        list_prov.append(v)
+    list_final.append(list_prov)
 range_write='Santifica el día!A22'
-value_range={'values':list}
+value_range={'values':list_final}
 write_sheets(range_write, value_range)
-"""
+
 #datos de las oraciones de la liturgia
 """
 list = []
