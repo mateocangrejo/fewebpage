@@ -34,14 +34,18 @@ write_sheets(range_write, value_range)
 list = []
 dict_oraciones_liturgia = get_oraciones_liturgia(date)
 for oracion,dict_prov in  dict_oraciones_liturgia.items():
-    list_int = [date, oracion]
+    list_int = [oracion]
     for name, item in dict_prov.items():
         #print('.................')
         #print(name)
         #print(item)
+        if name=='descripcion':
+            item=''
         list_int.append(item)
         #list.append(list_int)
+    list_int.append(date)
     list.append(list_int)
+
 range_write='Santifica el día!A27'
 value_range={'values':list}
 write_sheets(range_write, value_range)

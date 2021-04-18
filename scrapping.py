@@ -42,9 +42,9 @@ def get_oraciones_liturgia(date):
 
     dict_salida = {}
     for oracion, url in dict_urls.items():
-        print('\nEmpezamos con: ',oracion)
-        print('Accederemos a la url:',url)
-        print('Procesando ...................\n')
+        #print('\nEmpezamos con: ',oracion)
+        #print('Accederemos a la url:',url)
+        #print('Procesando ...................\n')
         page = requests.get(url)
         soup = BeautifulSoup(page.content, 'html.parser')
         try:
@@ -64,15 +64,17 @@ def get_oraciones_liturgia(date):
                 dict_prov['texto']=description[1].text
             if oracion == 'completas':
                 dict_prov['texto']='#'+dict_prov['texto'].split("#",1)[1]
-            print('titulo:',title_elem.text)
-            print('p_0:', description[0].text)
-            print('p_1:',description[1].text)
-            print('p_2:',description[2].text)
-            print('p_3:',description[3].text)
-            print('audio:',audio['href'])
+            #print('titulo:',title_elem.text)
+            #print('p_0:', description[0].text)
+            #print('p_1:',description[1].text)
+            #print('p_2:',description[2].text)
+            3print('p_3:',description[3].text)
+            #print('audio:',audio['href'])
             if youtube is not None:
                 dict_prov['youtube']=youtube['src']
-                print('youtube:',youtube['src'])
+                #print('youtube:',youtube['src'])
+            else:
+                dict_prov['youtube']=''
             dict_salida[oracion] = dict_prov
         except:
             continue
