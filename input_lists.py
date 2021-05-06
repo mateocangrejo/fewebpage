@@ -45,7 +45,8 @@ def list_oraciones_liturgia(date):
     list_final = []
     dict_oraciones_liturgia = get_oraciones_liturgia(date)
     for oracion,dict_prov in  dict_oraciones_liturgia.items():
-        list_int = [oracion]
+        #list_int = [oracion]
+        list_int = []
         for name, item in dict_prov.items():
             #print('.................')
             #print(name)
@@ -56,4 +57,5 @@ def list_oraciones_liturgia(date):
             #list.append(list_int)
         list_int.append(date)
         list_final.append(list_int)
+    print(list_final)
     return list_final

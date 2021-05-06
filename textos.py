@@ -22,7 +22,7 @@ def get_textos_liturgia(date):
         '11':'nov',
         '12':'dic',
     }
-    date_str = str(dt.year)+'/'+meses[str(dt.month)]+'/'+str(dt.day)
+    date_str = str(dt.year)+'/'+meses[str(dt.month)]+'/'+str(dt.strftime('%d'))
 
     #URL_ori='https://liturgiadelashoras.github.io/sync/2021/abr/11/laudes.htm'
     url_base = 'https://liturgiadelashoras.github.io/sync/'
@@ -36,7 +36,7 @@ def get_textos_liturgia(date):
     for oracion, name in dict_oraciones.items():
         url=url_base+date_str+'/'+oracion+'.htm'
         #print('............\n')
-        #print('Accederemos al URL de',oracion,':',url)
+        print('Accederemos al URL de',oracion,':',url)
 
         page = requests.get(url)
         soup = BeautifulSoup(page.content, 'html.parser')

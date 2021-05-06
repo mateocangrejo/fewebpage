@@ -80,4 +80,4 @@ def get_oraciones_liturgia(date):
             continue
 
     return dict_salida
-#get_oraciones_liturgia('2021-04-18')
+#print(get_oraciones_liturgia('2021-04-26'))
