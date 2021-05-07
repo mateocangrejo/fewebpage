@@ -34,15 +34,28 @@ def get_textos_liturgia(date):
     }
     dict_salida = {}
     for oracion, name in dict_oraciones.items():
-        url=url_base+date_str+'/'+oracion+'.htm'
-        #print('............\n')
-        print('Accederemos al URL de',oracion,':',url)
+        try:
+            url=url_base+date_str+'/'+oracion+'.htm'
+            #print('............\n')
+            print('Accederemos al URL de',oracion,':',url)
 
-        page = requests.get(url)
-        soup = BeautifulSoup(page.content, 'html.parser')
-        body = soup.find('div', id='cuerpo')
+            page = requests.get(url)
+            soup = BeautifulSoup(page.content, 'html.parser')
+            body = soup.find('div', id='cuerpo')
 
-        dict_salida[oracion]=str(body.decode_contents())
+            dict_salida[oracion]=str(body.decode_contents())
+        except:
+            url=url_base+date_str+'/2/'+oracion+'.htm'
+            #print('............\n')
+            print('Accederemos al URL de',oracion,':',url)
+
+            page = requests.get(url)
+            soup = BeautifulSoup(page.content, 'html.parser')
+            body = soup.find('div', id='cuerpo')
+
+            dict_salida[oracion]=str(body.decode_contents())
         #print(body.decode_contents())
         #input('Siguiente, dale enter:')
     return dict_salida
+#a = get_textos_liturgia('2021-05-06')
+#print(a)
