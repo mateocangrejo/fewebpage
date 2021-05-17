@@ -37,14 +37,24 @@ def get_gracia_dia(date):
         p_alls = body.find_all('p')
         texto = p_alls[0]
         description = p_alls[1]
+
+        if len(p_alls) >=3:
+            dict_prov = {
+                'titulo': title.text,
+                'texto': texto.text,
+                'descripcion': description.text,
+            }
+        else:
+            dict_prov = {
+                'titulo': title.text,
+                'texto': "",
+                'descripcion': texto.text,
+            }
+
         audio = body.find('a', class_='powerpress_link_d',href=True, title='Download')
         youtube = body.find('iframe', class_='youtube-player')
 
-        dict_prov = {
-            'titulo': title.text,
-            'texto': texto.text,
-            'descripcion': description.text,
-        }
+
         #print('titulo',title.text)
         #print('texto',texto.text)
         #print('descripcion',description.text)
