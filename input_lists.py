@@ -39,7 +39,6 @@ def list_textos_liturgia(date):
         list_final.append(list_prov)
     return list_final
 
-
 def list_oraciones_liturgia(date):
     #datos de las oraciones de la liturgia
     list_final = []
@@ -58,4 +57,23 @@ def list_oraciones_liturgia(date):
         list_int.append(date)
         list_final.append(list_int)
     print(list_final)
+    return list_final
+
+def one_value_oraciones_liturgia(date, oracion):
+    #datos de solo una oracion de la liturgia dada por parametro
+    list_final = []
+    dict_oraciones_liturgia = get_oraciones_liturgia(date)
+
+    dict_actual_oracion=dict_oraciones_liturgia[oracion]
+    list_int = []
+    for name, item in dict_actual_oracion.items():
+        #print('.................')
+        #print(name)
+        #print(item)
+        if name=='descripcion':
+            item=''
+        list_int.append(item)
+        #list.append(list_int)
+    list_int.append(date)
+    list_final.append(list_int)
     return list_final
