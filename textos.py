@@ -56,6 +56,9 @@ def get_textos_liturgia(date):
             dict_salida[oracion]=str(body.decode_contents())
         #print(body.decode_contents())
         #input('Siguiente, dale enter:')
+    oficio_text = dict_salida['oficio']
+    lectio_post = oficio_text.split("SEGUNDA LECTURA",1)[1]
+    lectio_seg_lect = lectio_post.split("RESPONSORIO",1)[0]
+    dict_salida['oficio']=lectio_seg_lect
     return dict_salida
-#a = get_textos_liturgia('2021-05-06')
-#print(a)
+#a = get_textos_liturgia('2021-05-16')
