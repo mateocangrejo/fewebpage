@@ -34,7 +34,8 @@ def get_gracia_dia(date):
 
         title = soup.find('h1', class_='title entry-title')
         body = soup.find('div', class_='nv-content-wrap entry-content')
-        p_alls = body.find_all('p')
+        p_alls = body.find_all('p',attrs={'class': None})
+        #print(len(p_alls))
         texto = p_alls[0]
         description = p_alls[1]
 
@@ -70,3 +71,4 @@ def get_gracia_dia(date):
         else:
             dict_prov['youtube'] = ""
         return dict_prov
+#print(get_gracia_dia('2021-05-16'))
