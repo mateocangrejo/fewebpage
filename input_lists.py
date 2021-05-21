@@ -21,7 +21,7 @@ def list_lecturas_misa(date):
     #lecturas de la misa
     lecturas_misa_dia = get_lectura_misa(date)
     range_write='Santifica el día!A25'
-    list_final= [["Lecturas del día","","","","",date,lecturas_misa_dia]]
+    list_final= [["Lecturas Eucaristía","","","","",date,lecturas_misa_dia]]
     return list_final
 
 def list_textos_liturgia(date):
