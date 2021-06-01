@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 import requests
 from bs4 import BeautifulSoup
 
@@ -6,6 +6,7 @@ from bs4 import BeautifulSoup
 
 def get_oraciones_liturgia(date):
     dt = datetime.strptime(date, '%Y-%m-%d')
+    yesterday = dt-timedelta(days=1)
     #print('Registraste la fecha:', dt.year,'-',dt.month,'-',dt.day)
 
     #urls_inputs
@@ -13,10 +14,14 @@ def get_oraciones_liturgia(date):
     #URL_ori_visperas = 'https://fraynelson.com/blog/2021/04/10/visperas-2021-04-10/'
     #URL_ori_completas = 'https://fraynelson.com/blog/2021/04/10/completas-20210410/'
     #URL_ori_lectio = 'http://fraynelson.com/blog/2021/04/10/lectio-2021-04-11/'
-    url_input_laudes = str(dt.year)+'/'+str(dt.month)+'/'+str(dt.day-1)
-    url_input_visperas = str(dt.year)+'/'+str(dt.month)+'/'+str(dt.day)
-    url_input_completas = str(dt.year)+'/'+str(dt.month)+'/'+str(dt.day)
-    url_input_lectio = str(dt.year)+'/'+str(dt.month)+'/'+str(dt.day-1)
+    url_input_laudes = yesterday.strftime('%Y/%m/%d')
+    url_input_visperas = dt.strftime('%Y/%m/%d')
+    url_input_completas = dt.strftime('%Y/%m/%d')
+    url_input_lectio = yesterday.strftime('%Y/%m/%d')
+    #url_input_laudes = str(dt.year)+'/'+str(dt.month)+'/'+str(dt.day-1)
+    #url_input_visperas = str(dt.year)+'/'+str(dt.month)+'/'+str(dt.day)
+    #url_input_completas = str(dt.year)+'/'+str(dt.month)+'/'+str(dt.day)
+    #url_input_lectio = str(dt.year)+'/'+str(dt.month)+'/'+str(dt.day-1)
 
     #Url_Dates
     url_date_laudes = date
@@ -80,4 +85,4 @@ def get_oraciones_liturgia(date):
             continue
 
     return dict_salida
-#print(get_oraciones_liturgia('2021-04-26'))
+#print(get_oraciones_liturgia('2021-06-01'))
