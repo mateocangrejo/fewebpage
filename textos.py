@@ -43,7 +43,8 @@ def get_textos_liturgia(date):
             soup = BeautifulSoup(page.content, 'html.parser')
             body = soup.find('div', id='cuerpo')
 
-            dict_salida[oracion]=str(body.decode_contents())
+            dict_salida[oracion]=str(body.decode_contents()).replace("#000000","")
+            dict_salida[oracion]=dict_salida[oracion].replace('CÁNTICO EVANGÉLICO<br/><br/>','CÁNTICO EVANGÉLICO<br/><br/></font>')
         except:
             url=url_base+date_str+'/2/'+oracion+'.htm'
             #print('............\n')
@@ -53,7 +54,9 @@ def get_textos_liturgia(date):
             soup = BeautifulSoup(page.content, 'html.parser')
             body = soup.find('div', id='cuerpo')
 
-            dict_salida[oracion]=str(body.decode_contents())
+            dict_salida[oracion]=str(body.decode_contents()).replace("#000000","")
+            dict_salida[oracion]=dict_salida[oracion].replace('CÁNTICO EVANGÉLICO<br/><br/>','CÁNTICO EVANGÉLICO<br/><br/></font>')
+
         #print(body.decode_contents())
         #input('Siguiente, dale enter:')
     oficio_text = dict_salida['oficio']
