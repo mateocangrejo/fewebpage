@@ -63,8 +63,10 @@ def one_value_oraciones_liturgia(date, oracion):
     #datos de solo una oracion de la liturgia dada por parametro
     list_final = []
     dict_oraciones_liturgia = get_oraciones_liturgia(date)
-
-    dict_actual_oracion=dict_oraciones_liturgia[oracion]
+    try:
+        dict_actual_oracion=dict_oraciones_liturgia[oracion]
+    except:
+        dict_actual_oracion = {'titulo':"",'texto':"",'descripcion':"",'audio':"",'youtube':""}
     list_int = []
     for name, item in dict_actual_oracion.items():
         #print('.................')
