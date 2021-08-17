@@ -26,7 +26,7 @@ def get_oraciones_liturgia(date):
     #Url_Dates
     url_date_laudes = date
     url_date_visperas = date
-    url_date_completas =  date.replace("-","")
+    url_date_completas =  date #.replace("-","")
     url_date_lectio = date
 
     #str(dt.year)+str(dt.month)+str(dt.day)
@@ -85,4 +85,4 @@ def get_oraciones_liturgia(date):
             continue
 
     return dict_salida
-#print(get_oraciones_liturgia('2021-06-19'))
+#print(get_oraciones_liturgia('2021-08-16'))
