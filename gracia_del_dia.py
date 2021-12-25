@@ -11,13 +11,14 @@ def get_gracia_dia(date):
 
     soup = BeautifulSoup(page.content, 'html.parser')
 
-    body = soup.find('div', class_='posts-wrapper row')
+    #body = soup.find('div', class_='posts-wrapper row')
+    body = soup.find('div', class_='content-area')
     articles = body.find_all('article')
 
     max = 3
     urls = []
     for i, article in enumerate(articles):
-        title = article.find('h2', class_='blog-entry-title entry-title')
+        title = article.find('h2', class_='entry-title')
         url = title.find('a')
         if date in url['href']:
             urls.append(url['href'])
@@ -32,8 +33,8 @@ def get_gracia_dia(date):
         soup = BeautifulSoup(page.content, 'html.parser')
         #print(soup_day)
 
-        title = soup.find('h1', class_='title entry-title')
-        body = soup.find('div', class_='nv-content-wrap entry-content')
+        title = soup.find('h1', class_='entry-title')
+        body = soup.find('div', class_='entry-content')
         p_alls = body.find_all('p',attrs={'class': None})
         #print(len(p_alls))
         texto = p_alls[0]
@@ -52,9 +53,9 @@ def get_gracia_dia(date):
                 'descripcion': texto.text,
             }
 
-        audio = body.find('a', class_='powerpress_link_d',href=True, title='Download')
-        youtube = body.find('iframe', class_='youtube-player')
-
+        audio = body.find('a', class_='powerpress_link_pinw')#,title='Download')
+        youtube = body.find('iframe') #, class_='youtube-player')
+        #print(audio)
 
         #print('titulo',title.text)
         #print('texto',texto.text)
@@ -71,4 +72,4 @@ def get_gracia_dia(date):
         else:
             dict_prov['youtube'] = ""
         return dict_prov
-#print(get_gracia_dia('2021-05-16'))
+#print(get_gracia_dia('2021-12-12'))

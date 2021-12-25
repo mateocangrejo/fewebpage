@@ -47,17 +47,17 @@ def get_oraciones_liturgia(date):
 
     dict_salida = {}
     for oracion, url in dict_urls.items():
-        #print('\nEmpezamos con: ',oracion)
-        #print('Accederemos a la url:',url)
-        #print('Procesando ...................\n')
+        print('\nEmpezamos con: ',oracion)
+        print('Accederemos a la url:',url)
+        print('Procesando ...................\n')
         page = requests.get(url)
         soup = BeautifulSoup(page.content, 'html.parser')
         try:
-            title_elem = soup.find('h1', class_='title entry-title')
-            body = soup.find('div', class_='nv-content-wrap entry-content')
+            title_elem = soup.find('h1', class_='entry-title')
+            body = soup.find('div', class_='entry-content')
             description = body.find_all('p')
-            youtube = body.find('iframe', class_='youtube-player')
-            audio = body.find('a', class_='powerpress_link_d',href=True, title='Download')
+            youtube = body.find('iframe') #, class_='youtube-player')
+            audio = body.find('a', class_='powerpress_link_pinw')#,href=True, title='Download')
             dict_prov = {
                 'titulo': title_elem.text,
                 'texto': description[0].text,
@@ -85,4 +85,4 @@ def get_oraciones_liturgia(date):
             continue
 
     return dict_salida
-#print(get_oraciones_liturgia('2021-08-16'))
+#print(get_oraciones_liturgia('2021-12-25'))
