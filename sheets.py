@@ -1,5 +1,9 @@
+import os
+import json
+from dotenv import load_dotenv
 from googleapiclient.discovery import build
 from google.oauth2 import service_account
+load_dotenv()
 
 def read_sheets(sample_range):
 
@@ -27,8 +31,16 @@ def write_sheets(range_write, value_range):
     SERVICE_ACCOUNT_FILE = 'client_secret.json'
     SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
     creds = None
-    creds = service_account.Credentials.from_service_account_file(
-            SERVICE_ACCOUNT_FILE, scopes=SCOPES)
+    #creds = service_account.Credentials.from_service_account_file(
+    #        SERVICE_ACCOUNT_FILE, scopes=SCOPES) #Old one
+
+    json_str = os.environ.get('GOOGLE_APPLICATION_CREDENTIALS')
+    # generate json - if there are errors here remove newlines in .env
+    json_data = json.loads(json_str)
+    # the private_key needs to replace \n parsed as string literal with escaped newlines
+    json_data['private_key'] = json_data['private_key'].replace('\\n', '\n')
+    creds = service_account.Credentials.from_service_account_info(
+        json_data)
 
     SAMPLE_SPREADSHEET_ID = '1wkaKyBaYxRxpyZhMb0doI5QQk6h0gLZdYS7vE8340iE'
 
