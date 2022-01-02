@@ -47,9 +47,9 @@ def get_oraciones_liturgia(date):
 
     dict_salida = {}
     for oracion, url in dict_urls.items():
-        print('\nEmpezamos con: ',oracion)
-        print('Accederemos a la url:',url)
-        print('Procesando ...................\n')
+        #print('\nEmpezamos con: ',oracion)
+        #print('Accederemos a la url:',url)
+        #print('Procesando ...................\n')
         page = requests.get(url)
         soup = BeautifulSoup(page.content, 'html.parser')
         try:
