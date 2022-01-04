@@ -4,6 +4,7 @@ import pytz
 from bs4 import BeautifulSoup
 from sheets import read_sheets, write_sheets
 from input_lists import *
+from whatsapp import send_whatsapp_message
 
 co_tz = pytz.timezone('America/Bogota')
 now = datetime.now(co_tz)
@@ -27,28 +28,40 @@ def post_alimento_daily(date,initial_row):
     posting_sheets(one_value_oraciones_liturgia(date, 'visperas'),'Santifica el día','B'+str(initial_row+4))
     posting_sheets(one_value_oraciones_liturgia(date, 'completas'),'Santifica el día','B'+str(initial_row+5))
 
+def post_update_dates(date,initial_row):
+    list_dates = [[date] for i in range(6)]
+    print(list_dates)
+    posting_sheets(list_dates,'Santifica el día','G'+str(initial_row))
+
 def post_alimento_noche(date):
     post_alimento_daily(date,8)
 def post_alimento_madrugada(date):
     post_alimento_daily(date,2)
 
-
 #if boolean == '0':
 #    post_alimento_madrugada(date)
 #elif boolean =='1':
 #    post_alimento_noche(date)
+
 try:
     print("Trying...",today)
     post_alimento_madrugada(today)
+    message = f"Do it for today: {today} \n"
 except:
-    print("cant do it for:",today)
+    print("Cant do it for:",today)
+    post_update_dates(today, 2)
+    message = f"Cant do it for today: {today} \n"
 try:
     print("Trying...",tomorow_day)
     post_alimento_noche(tomorow_day)
+    message += f"Do it for tomorrow: {tomorow_day} \n"
 except:
-    print("cant do it for:",tomorow_day)
+    print("Cant do it for:",tomorow_day)
+    post_update_dates(tomorow_day, 8)
+    message += f"Cant do it for tomorrow: {tomorow_day} \n"
 
 
+send_whatsapp_message(message)
 
 #posting_sheets(list_oraciones_liturgia(date),'Santifica el día','A24')
 
