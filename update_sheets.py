@@ -1,5 +1,6 @@
 from datetime import datetime,timedelta
 import requests
+import traceback
 import pytz
 from bs4 import BeautifulSoup
 from sheets import read_sheets, write_sheets
@@ -47,16 +48,20 @@ try:
     print("Trying...",today)
     post_alimento_madrugada(today)
     message = f"Do it for today: {today} \n"
-except:
+except Exception as e:
     print("Cant do it for:",today)
+    print(e,e.args)
+    traceback.print_exc()
     post_update_dates(today, 2)
     message = f"Cant do it for today: {today} \n"
 try:
     print("Trying...",tomorow_day)
     post_alimento_noche(tomorow_day)
     message += f"Do it for tomorrow: {tomorow_day} \n"
-except:
+except Exception as e:
     print("Cant do it for:",tomorow_day)
+    print(e,e.args)
+    traceback.print_exc()
     post_update_dates(tomorow_day, 8)
     message += f"Cant do it for tomorrow: {tomorow_day} \n"
 

@@ -50,6 +50,7 @@ def get_oraciones_liturgia(date):
         #print('\nEmpezamos con: ',oracion)
         #print('Accederemos a la url:',url)
         #print('Procesando ...................\n')
+        print(url)
         page = requests.get(url)
         soup = BeautifulSoup(page.content, 'html.parser')
         try:
@@ -85,4 +86,4 @@ def get_oraciones_liturgia(date):
             continue
 
     return dict_salida
-#print(get_oraciones_liturgia('2021-12-25'))
+#print(get_oraciones_liturgia('2022-03-02'))

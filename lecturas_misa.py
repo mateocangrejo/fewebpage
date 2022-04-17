@@ -30,3 +30,4 @@ def get_lectura_misa(date):
         #print(name)
         #print(texto)
     return final_text
+#print(get_lectura_misa('2022-03-28'))

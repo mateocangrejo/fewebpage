@@ -20,9 +20,10 @@ def get_gracia_dia(date):
     for i, article in enumerate(articles):
         title = article.find('h2', class_='entry-title')
         url = title.find('a')
+        print(url)
         if date in url['href']:
             urls.append(url['href'])
-            #print(url['href'])
+            print(url['href'])
         if i >=max:
             break
 
@@ -72,4 +73,4 @@ def get_gracia_dia(date):
         else:
             dict_prov['youtube'] = ""
         return dict_prov
-#print(get_gracia_dia('2021-12-12'))
+#print(get_gracia_dia('2022-03-17'))
