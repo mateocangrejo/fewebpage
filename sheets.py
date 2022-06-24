@@ -13,7 +13,7 @@ def read_sheets(sample_range):
     creds = service_account.Credentials.from_service_account_file(
             SERVICE_ACCOUNT_FILE, scopes=SCOPES)
 
-    SAMPLE_SPREADSHEET_ID = '1wkaKyBaYxRxpyZhMb0doI5QQk6h0gLZdYS7vE8340iE'
+    SAMPLE_SPREADSHEET_ID = '1xbJfHv4XNctvIJr3GiGkOKK5VNpvxa-45Owgr5LZyTs'
 
     service = build('sheets', 'v4', credentials=creds)
     # Call the Sheets API
@@ -42,7 +42,7 @@ def write_sheets(range_write, value_range):
     creds = service_account.Credentials.from_service_account_info(
         json_data)
 
-    SAMPLE_SPREADSHEET_ID = '1wkaKyBaYxRxpyZhMb0doI5QQk6h0gLZdYS7vE8340iE'
+    SAMPLE_SPREADSHEET_ID = '1xbJfHv4XNctvIJr3GiGkOKK5VNpvxa-45Owgr5LZyTs'
 
     service = build('sheets', 'v4', credentials=creds)
 
