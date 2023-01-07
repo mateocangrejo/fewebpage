@@ -6,8 +6,14 @@ on:
   workflow_dispatch:
 
 jobs:
-  my-job:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: first-step
-        run: echo "Hola FE"
+      - uses: actions/checkout@v2
+        uses: actions/setup-python@v2
+          with:
+            python-version: 3.x
+      - name: run update sheets
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: ${{secrets.GOOGLE_APPLICATION_CREDENTIALS}}
+        run: python update_sheets.py
