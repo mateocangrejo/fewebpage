@@ -66,7 +66,7 @@ except Exception as e:
     message += f"Cant do it for tomorrow: {tomorow_day} \n"
 
 
-send_whatsapp_message(message)
+#send_whatsapp_message(message)
 
 #posting_sheets(list_oraciones_liturgia(date),'Santifica el día','A24')
 

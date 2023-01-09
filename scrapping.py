@@ -86,4 +86,4 @@ def get_oraciones_liturgia(date):
             continue
 
     return dict_salida
-#print(get_oraciones_liturgia('2022-03-02'))
+print(get_oraciones_liturgia('2023-01-08'))
