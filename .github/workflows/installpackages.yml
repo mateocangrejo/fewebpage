@@ -1,4 +1,4 @@
-name: learn-github-actions
+name: install-packages
 on: [push]
 jobs:
   install-requirements:
