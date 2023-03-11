@@ -64,14 +64,3 @@ except Exception as e:
     traceback.print_exc()
     post_update_dates(tomorow_day, 8)
     message += f"Cant do it for tomorrow: {tomorow_day} \n"
-
-
-#send_whatsapp_message(message)
-
-#posting_sheets(list_oraciones_liturgia(date),'Santifica el día','A24')
-
-
-#update_night(date,range_write):
-#   update_laudes(date), update_lectio(date), update_gracia(date), update_homilia(date)
-#update_morning(date,range_write):
-#   update_visperas(date), update_completas(date)
