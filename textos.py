@@ -64,4 +64,5 @@ def get_textos_liturgia(date):
     lectio_seg_lect = lectio_post.split("RESPONSORIO",1)[0]
     dict_salida['oficio']=lectio_seg_lect
     return dict_salida
-#a = get_textos_liturgia('2021-05-16')
+#a = get_textos_liturgia('2023-11-05')
+#print(a)

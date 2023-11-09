@@ -8,4 +8,5 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           python-version: 3.x
+      - run: pip install --upgrade pip
       - run: pip install requests

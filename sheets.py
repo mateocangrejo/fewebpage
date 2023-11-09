@@ -35,8 +35,10 @@ def write_sheets(range_write, value_range):
     #        SERVICE_ACCOUNT_FILE, scopes=SCOPES) #Old one
 
     json_str = os.environ.get('GOOGLE_APPLICATION_CREDENTIALS')
+    #print(json_str)
     # generate json - if there are errors here remove newlines in .env
     json_data = json.loads(json_str)
+    
     # the private_key needs to replace \n parsed as string literal with escaped newlines
     json_data['private_key'] = json_data['private_key'].replace('\\n', '\n')
     creds = service_account.Credentials.from_service_account_info(
