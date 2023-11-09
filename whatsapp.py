@@ -1,6 +1,6 @@
 import os
 from dotenv import load_dotenv
-from twilio.rest import Client
+#from twilio.rest import Client
 load_dotenv()
 
 def send_whatsapp_message(body):
