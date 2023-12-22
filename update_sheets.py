@@ -4,7 +4,7 @@ import traceback
 import pytz
 from bs4 import BeautifulSoup
 from sheets import read_sheets, write_sheets
-from input_lists import *
+from input_lists import list_textos_liturgia,one_value_oraciones_liturgia,list_gracia_dia,list_lecturas_misa
 from whatsapp import send_whatsapp_message
 
 co_tz = pytz.timezone('America/Bogota')

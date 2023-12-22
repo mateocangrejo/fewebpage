@@ -26,43 +26,64 @@ def get_textos_liturgia(date):
 
     #URL_ori='https://liturgiadelashoras.github.io/sync/2021/abr/11/laudes.htm'
     url_base = 'https://liturgiadelashoras.github.io/sync/'
-    dict_oraciones = {
+    dict_input_oraciones = {
         'laudes': 'laudes',
         'visperas': 'visperas',
         'completas': 'completas',
         'oficio': 'oficio'
     }
+    dict_info = {
+        'url_base':url_base,
+        'date_str':date_str
+    }
+    dict_salida  = get_dict_oraciones(dict_info, dict_input_oraciones)
+    return dict_salida
+
+def get_dict_oraciones(dict_info, dict_input_oraciones):
+    """"
+    Devuelve un diccionario de oraciones dependiendo del las oraciones en dict_input_oraciones.
+    Diccionario helper: dict_info
+    """
+    #get variables
+    url_base = dict_info.get('url_base')
+    date_str = dict_info.get('date_str')
     dict_salida = {}
-    for oracion, name in dict_oraciones.items():
+    for oracion, name in dict_input_oraciones.items():
         try:
             url=url_base+date_str+'/'+oracion+'.htm'
             #print('............\n')
             print('Accederemos al URL de',oracion,':',url)
-
-            page = requests.get(url)
-            soup = BeautifulSoup(page.content, 'html.parser')
-            body = soup.find('div', id='cuerpo')
-
-            dict_salida[oracion]=str(body.decode_contents()).replace("#000000","")
-            dict_salida[oracion]=dict_salida[oracion].replace('CÁNTICO EVANGÉLICO<br/><br/>','CÁNTICO EVANGÉLICO<br/><br/></font>')
+            body_oracion = get_one_body_oracion(url,oracion)
         except:
-            url=url_base+date_str+'/2/'+oracion+'.htm'
-            #print('............\n')
-            print('Accederemos al URL de',oracion,':',url)
+            try:
+                url=url_base+date_str+'/2/'+oracion+'.htm'
+                #print('............\n')
+                print('Accederemos al URL de',oracion,':',url)
+                body_oracion = get_one_body_oracion(url,oracion)
+            except Exception as e:
+                print('No pude extraer el texto para la oracion',oracion, 'en', url)
+                print('error:',e)
+                body_oracion=''
+        
+        dict_salida[oracion]=body_oracion
 
-            page = requests.get(url)
-            soup = BeautifulSoup(page.content, 'html.parser')
-            body = soup.find('div', id='cuerpo')
-
-            dict_salida[oracion]=str(body.decode_contents()).replace("#000000","")
-            dict_salida[oracion]=dict_salida[oracion].replace('CÁNTICO EVANGÉLICO<br/><br/>','CÁNTICO EVANGÉLICO<br/><br/></font>')
-
-        #print(body.decode_contents())
-        #input('Siguiente, dale enter:')
-    oficio_text = dict_salida['oficio']
-    lectio_post = oficio_text.split("SEGUNDA LECTURA",1)[1]
-    lectio_seg_lect = lectio_post.split("RESPONSORIO",1)[0]
-    dict_salida['oficio']=lectio_seg_lect
     return dict_salida
-#a = get_textos_liturgia('2023-11-05')
+
+def get_one_body_oracion(url,oracion):
+    """
+    Retorna el cuerpo de texto dada una url y un tipo de oracion
+    """
+    page = requests.get(url)
+    soup = BeautifulSoup(page.content, 'html.parser')
+    body = soup.find('div', id='cuerpo')
+    body_oracion = str(body.decode_contents()).replace("#000000","")
+    body_oracion = body_oracion.replace('CÁNTICO EVANGÉLICO<br/><br/>','CÁNTICO EVANGÉLICO<br/><br/></font>')
+    if oracion=='oficio':
+        #solo queremos la Segunda lectura del oficio
+        lectio_post = body_oracion.split("SEGUNDA LECTURA",1)[1]
+        lectio_seg_lect = lectio_post.split("RESPONSORIO",1)[0]
+        body_oracion = lectio_seg_lect
+    return body_oracion
+
+#a = get_textos_liturgia('2023-12-21')
 #print(a)
